@@ -1,0 +1,32 @@
+name: CI Checks
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install devbox
+        uses: jetify-com/devbox-install-action@v0.11.0
+
+      - name: Lint Code
+        run: devbox run lint
+
+      - name: New Cloudspace
+        run: devbox run new-cloudspace
+
+      - name: Initialize Cloudspace Terraform workspace
+        run: devbox run init
+      
+      - name: Plan Cloudspace Terraform changes
+        run: devbox run plan-cloudspace
+        env:
+          RXTSPOT_TOKEN: ${{ secrets.RXTSPOT_TOKEN }}
