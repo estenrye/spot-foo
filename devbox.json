@@ -3,7 +3,7 @@
   "packages": [
     "terraform@1.8.2",
     "go-task@3.36.0",
-    "jq@1.7.1",
+    "jq@1.8.2",
     "curl@8.7.1",
     "envsubst@1.4.2",
     "tflint@0.50.3"
